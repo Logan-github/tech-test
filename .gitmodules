@@ -1,4 +1,4 @@
 [submodule "www"]
 	path = www
-	url = https://github.com/whitesunset/wannacrypt_balance
+	url = https://github.com/whitesunset/wannacrypt_balance.git
 
