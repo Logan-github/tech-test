@@ -1,3 +1,5 @@
+//assume that EC2 instances are already built and available for deployments.
+//asssume that ssh configuration is already set between jenkins build server and EC2 instances.
 registryHost = "<registry-URL>"
 buildContainerVersion = "1.0"
 imageName = "demo-app"
@@ -35,18 +37,9 @@ pipeline {
                 }
             }
     }
-    stage('Build EC2 instance') {
-            steps {
-                sh '''
-                    terraform init
-                    terraform apply
-                    terraform state list
-                '''
-            }
-        }
     stage ('Deploy') {
         steps {
-            sh 'scp ./scripts/deploy_image.sh ${REMOTE_USER}@${REMOTE_HOST}:~/'
+            sh 'scp ./deploy_image.sh ${REMOTE_USER}@${REMOTE_HOST}:~/'
             sh 'ssh ${REMOTE_USER}@${REMOTE_HOST} -i docker-instane.pem "chmod +x deploy_image.sh"'
             sh 'ssh ${REMOTE_USER}@${REMOTE_HOST} -i docker-instance.pem ./deploy_image.ssh'
         }
