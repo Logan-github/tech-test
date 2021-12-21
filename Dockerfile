@@ -10,7 +10,7 @@ RUN mkdir /run/nginx/  && \
     chmod 775 /run/nginx/ 
 
 COPY ./supervisor/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-COPY ./nginx/nginx.conf /etc/nginx/conf.d/default.conf
+COPY ./nginx/default.conf /etc/nginx/conf.d/default.conf
 
 RUN mkdir /www && \
     chown -R nginx:www /var/lib/nginx && \
